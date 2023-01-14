@@ -1,0 +1,185 @@
+
+<!--menu start---->
+<ion-menu contentId="main-content" style="--max-width:250px">
+  <ion-content class="ion-padding">
+    <ion-list>
+      <ion-item lines="none" [routerLink]="['/tabs/tab1']">
+        <ion-icon name="alarm-outline" slot="start"></ion-icon>
+        <ion-label slot="start">Target</ion-label>
+      </ion-item>
+      <ion-item lines="none" [routerLink]="['/tabs/tab2']">
+        <ion-icon name="albums-outline" slot="start"></ion-icon>
+        <ion-label slot="start">Group</ion-label>
+      </ion-item>
+      <ion-item lines="none" [routerLink]="['/tabs/tab3']">
+        <ion-icon name="trending-down-outline" slot="start"></ion-icon>
+        <ion-label>Chart</ion-label>
+      </ion-item>
+      <ion-item lines="none" [routerLink]="['/tabs/tab4']">
+        <ion-icon name="today-outline" slot="start"></ion-icon>
+        <ion-label>Today</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+  <ion-footer>
+    <ion-list>
+      <ion-item lines="none">
+        <ion-buttons [routerLink]="['/tutorial']">
+          <ion-button>
+            <ion-icon name="headset-outline"></ion-icon>
+          </ion-button>
+          <ion-label slot="start">Help</ion-label>
+        </ion-buttons>
+        <ion-buttons slot="end" [routerLink]="['/target']">
+          <ion-button>
+            <ion-icon name="settings-outline"></ion-icon>
+          </ion-button>
+          <ion-label slot="start" style="margin-right:10px;">Settings</ion-label>
+        </ion-buttons>
+      </ion-item>
+    </ion-list>
+  </ion-footer>
+</ion-menu>  
+<!--menu end---->
+<div class="ion-page" id="main-content">
+  <ion-header class="ion-no-border">
+    <ion-toolbar>
+      <!--
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      -->
+      <ion-title style="font-size: x-large;">设置</ion-title>
+      <!--
+      <ion-buttons slot="end">
+        <ion-button>
+          <ion-icon name="add-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      -->
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item (click)="goTutorial()">
+        <p>
+          <ion-label style="display:flex;align-items:center;">
+            <ion-icon name="bulb-outline" style="margin-right:15px;font-size:25px;"></ion-icon>
+            <ion-label style="flex:inherit; margin-right:10px;font-size: large;font-weight:bold;">快速入门</ion-label>
+          </ion-label>
+        </p>
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <p>
+          <ion-label style="display:flex;align-items:center;">
+            <ion-icon name="cloud-upload-outline" style="margin-right:15px;font-size:25px;"></ion-icon>
+            <ion-label style="flex:inherit; margin-right:10px;font-size: large;font-weight:bold;">数据备份与恢复</ion-label>
+          </ion-label>
+        </p>
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <p>
+          <ion-label style="display:flex;align-items:center;">
+            <ion-icon name="key-outline" style="margin-right:15px;font-size:25px;"></ion-icon>
+            <ion-label style="flex:inherit; margin-right:10px;font-size: large;font-weight:bold;">密码保护</ion-label>
+          </ion-label>
+        </p>
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+      
+      <ion-item (click)="goHistory()">
+        <p>
+          <ion-label style="display:flex;align-items:center;">
+            <ion-icon name="school-outline" style="margin-right:15px;font-size:25px;"></ion-icon>
+            <ion-label style="flex:inherit; margin-right:10px;font-size: large;font-weight:bold;">历史上的今天</ion-label>
+          </ion-label>
+        </p>
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <p>
+          <ion-label style="display:flex;align-items:center;">
+            <ion-icon name="chatbubble-ellipses-outline" style="margin-right:15px;font-size:25px;"></ion-icon>
+            <ion-label style="flex:inherit; margin-right:10px;font-size: large;font-weight:bold;">联系客服</ion-label>
+          </ion-label>
+        </p>
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <p>
+          <ion-label style="display:flex;align-items:center;">
+            <ion-icon name="pencil-outline" style="margin-right:15px;font-size:25px;"></ion-icon>
+            <ion-label style="flex:inherit; margin-right:10px;font-size: large;font-weight:bold;">用户协议</ion-label>
+          </ion-label>
+        </p>
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <p>
+          <ion-label style="display:flex;align-items:center;">
+            <ion-icon name="shield-checkmark-outline" style="margin-right:15px;font-size:25px;"></ion-icon>
+            <ion-label style="flex:inherit; margin-right:10px;font-size: large;font-weight:bold;">隐私保护政策</ion-label>
+          </ion-label>
+        </p>
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <p>
+          <ion-label style="display:flex;align-items:center;">
+            <ion-icon name="information-circle-outline" style="margin-right:15px;font-size:25px;"></ion-icon>
+            <ion-label style="flex:inherit; margin-right:10px;font-size: large;font-weight:bold;">当前版本</ion-label>
+          </ion-label>
+        </p>
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+    </ion-list>
+
+
+<!--
+    <ion-item lines="none">
+      <p>
+        <ion-label>
+          <b style="font-size:x-large;">里程碑</b>
+        </ion-label>
+        <br>
+        <ion-label>
+          今年目标已经完成的进度
+        </ion-label>
+      </p>    
+  
+      <ion-badge slot="end" 
+      style="--background:white;--color:black;text-align:center;border:1px solid lightgray;
+      border-radius:100%;font-size: xx-large;padding:20px;">95</ion-badge>
+    </ion-item>
+    -->
+
+<!--
+    <ion-item style="--background:transparent;" lines="none" (click)="resetData()">
+      <p>
+        <ion-button>
+          <b>Group&Target数据重置</b>
+        </ion-button>
+        <br>
+        <ion-label>
+          test only
+        </ion-label>
+      </p>  
+    </ion-item>
+
+    <ion-item style="--background:transparent;" lines="none" (click)="printData()">
+      <p>
+        <ion-button>
+          <b>Print Data</b>
+        </ion-button>
+        <br>
+        <ion-label>
+          test only
+        </ion-label>
+      </p>  
+    </ion-item>
+  -->
+
+  </ion-content>
+</div>  

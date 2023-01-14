@@ -1,0 +1,81 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="transparent">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home" color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">移动和缩放调整图片</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="outer-content viewer-bg">
+  
+
+  <div style="display:flex;justify-content:center;">
+    <div class="viewer-card front" style="position:fixed;border:1px solid red;">
+      <canvas id="mycanvas" class="viewer-card front" style="-webkit-filter: blur({{blur}}px); -moz-filter: blur({{blur}}px); filter: blur({{blur}}px);"></canvas>
+    </div>
+    
+
+    <!--background start-->
+    <!--
+    <ion-card class="viewer-card front adbg"
+      style="position:fixed;-webkit-filter: blur({{blur}}px); -moz-filter: blur({{blur}}px); filter: blur({{blur}}px);">
+    </ion-card>
+    -->
+    <!--background end-->
+
+
+    <!--text start-->
+    
+    <ion-card class="viewer-card front" *ngIf="currentTarget" style="--background:transparent;pointer-events: none;">
+      <ion-card-header >
+        <ion-card-subtitle style="--color:white;text-align:center;">
+          <b style="font-size: large;color:{{fontColor}}">{{currentTarget.name}}{{currentTarget.type==1?'已经':'还有'}}</b>
+        </ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content style="text-align:center;padding:5px;">
+        <b style="font-size:120px;color:{{fontColor}};" [ngClass]="{'font1':fontType==1, 'font2':fontType==2}">
+          {{currentTarget.days}}
+        </b>
+      </ion-card-content>
+
+      <ion-card-header style="padding:10px;position: absolute;bottom:0;width:100%;">
+        <ion-card-subtitle style="--color:{{fontColor}};text-align:center;padding:5px 0;">
+          {{currentTarget.type==1?'起始日':'目标日'}}: {{currentTarget.date|date:'yyyy-MM-dd EEEE'}} 
+        </ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+    
+    <!--text end-->
+  </div>
+
+  <ion-item lines="none" style="--background:transparent;">
+    <ion-label style="font-size:large;font-weight:bold;color:white;">模糊图片</ion-label>
+  </ion-item>
+  <ion-range min="0" max="15" [(ngModel)]="blur">
+    <ion-icon slot="start" name="triangle-outline"></ion-icon>
+    <ion-icon slot="end" name="water-outline"></ion-icon>
+  </ion-range>
+
+  <ion-item lines="none" style="--background:transparent;">
+    <ion-label style="font-size:large;font-weight:bold;color:white;">字体颜色</ion-label>
+  </ion-item>
+
+  <ion-item lines="none">
+    <ion-segment value="custom" (ionChange)="fontChange($event)">
+      <ion-segment-button value="black">
+        <ion-label>黑</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="white">
+        <ion-label>白</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-item>
+  
+
+  <div class="action-button-box" style="margin-top:30px;">
+    <ion-button expand="full" class="action-button" (click)="cancel()">取消</ion-button>
+    <ion-button expand="full" class="action-button" (click)="complete()">完成</ion-button>
+  </div>
+
+</ion-content>

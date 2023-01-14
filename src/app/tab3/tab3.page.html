@@ -1,0 +1,49 @@
+<!--header start---->
+<ion-header class="ion-no-border">
+  <ion-toolbar color="white">
+    <ion-title style="font-size: x-large;">分析</ion-title>
+    <!--
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/target']">
+        <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    -->
+  </ion-toolbar>
+</ion-header>
+<ion-header class="ion-no-border">
+  <ion-item style="--background:transparent;margin-bottom:0;" lines="none" [routerLink]="['/tabs/tab1']">
+    <p>
+      <ion-label color="medium" style="font-size:small;margin:5px 0;">
+        {{ today | date:'yyyy-MM-dd'}}
+      </ion-label>
+      <ion-label>
+        <b style="font-size:x-large;">完成度</b>
+      </ion-label>
+      <br>
+    </p>
+    <ion-label slot="end">
+      <b style="font-size:xx-large;">{{(donePercentage*100).toFixed(2)}}%</b>
+    </ion-label>
+  </ion-item>
+  <ion-item style="--background:transparent;" lines="none" [routerLink]="['/tabs/tab1']">
+    <ion-progress-bar [value]="donePercentage" style="height:30px;" color="secondary">
+    </ion-progress-bar>
+  </ion-item>
+</ion-header>
+  <!--header end---->
+<ion-content>
+  <!--chart start---->
+  <ion-slides style="height:100%;">
+    <ion-slide class="chart-top">
+      <div id="radar" class="demo-chart"></div>
+    </ion-slide>
+    <ion-slide class="chart-top">
+      <div id="bar" class="demo-chart"></div>
+    </ion-slide>
+    <ion-slide class="chart-top">
+      <div id="pie" class="demo-chart"></div>
+    </ion-slide>
+  </ion-slides>
+  <!--chart end---->
+</ion-content>

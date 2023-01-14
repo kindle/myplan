@@ -1,0 +1,35 @@
+<ion-tabs (ionTabsDidChange)="ionTabsDidChange($event)">
+
+  <ion-tab-bar slot="bottom" [ngStyle]="{'padding-top': uiService.isIos ? '10px' : '' }">
+    <ion-tab-button tab="tab1">
+      <ion-icon name="calendar-outline" *ngIf="curTab!='tab1'"></ion-icon>
+      <ion-icon name="calendar" *ngIf="curTab=='tab1'"></ion-icon>
+      <ion-label>Target</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab2">
+      <ion-icon name="cube-outline" *ngIf="curTab!='tab2'"></ion-icon>
+      <ion-icon name="cube" *ngIf="curTab=='tab2'"></ion-icon>
+      <ion-label>Group</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab3">
+      <ion-icon name="bar-chart-outline" *ngIf="curTab!='tab3'"></ion-icon>
+      <ion-icon name="bar-chart" *ngIf="curTab=='tab3'"></ion-icon>
+      <ion-label>Chart</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab4">
+      <ion-icon name="list-outline" *ngIf="curTab!='tab4'"></ion-icon>
+      <ion-icon name="list" *ngIf="curTab=='tab4'"></ion-icon>
+      <ion-label>Note</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab5">
+      <ion-icon name="id-card-outline" *ngIf="curTab!='tab5'"></ion-icon>
+      <ion-icon name="id-card" *ngIf="curTab=='tab5'"></ion-icon>
+      <ion-label>Badge</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+
+</ion-tabs>

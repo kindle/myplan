@@ -1,0 +1,122 @@
+<ion-content>
+  <div class="ion-page">
+    <!--header start---->
+    <ion-header class="ion-no-border">
+      <ion-toolbar color="white">
+        <ion-title *ngIf="isList">
+          <span [ngClass]="{'big-text':segment==0, 'small-text':segment==1}"
+            (click)="toggleSegment()">
+            我的目标
+          </span>
+          <span [ngClass]="{'big-text':segment==1, 'small-text':segment==0}"
+            (click)="toggleSegment()">
+            已完成
+          </span>
+        </ion-title>
+        <ion-title *ngIf="!isList" style="font-size: x-large;">目标卡</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="toggleListGrid()" *ngIf="isList">
+            <ion-icon name="list-outline" class="button-size"></ion-icon>
+          </ion-button>
+          <ion-button (click)="toggleListGrid()" *ngIf="!isList">
+            <ion-icon name="grid-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+          <ion-button [routerLink]="['/target']">
+            <ion-icon name="add-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <!--header end---->
+    <!--top start---->
+    <ion-header *ngIf="isList" class="ion-no-border">
+      <ion-item lines="none" [ngClass]="{'future':false, 'past':true}" 
+      *ngFor="let target of getTopData();" (click)="goTargetViewer(target)">
+        <p>
+          <ion-label class="ion-text-wrap">
+            <b style="font-size:x-large;">{{target.name}}</b>
+          </ion-label>
+          <ion-label class="ion-text-wrap" color="medium">{{target.date|date:'yyyy-MM-dd EE'}}</ion-label>
+        </p>
+        <ion-label slot="end">
+          <b style="font-size:xx-large;">{{target.days}}</b>
+        </ion-label>
+        <ion-badge color="danger" slot="end">天</ion-badge>
+      </ion-item>
+    </ion-header>
+    <!--top end---->
+    <!--list start---->
+    <ion-content class="outer-content" *ngIf="isList" style="background-color:#f4f5f8;z-index:0;">
+      <!--refresher start---->
+      <ion-refresher slot="fixed" (ionRefresh)="dragDown($event)" *ngIf="enableRefresher">
+        <ion-refresher-content
+          pullingIcon=""
+          pullingText="继续下拉添加目标"
+          refreshingSpinner=""
+          refreshingText="">
+        </ion-refresher-content>
+      </ion-refresher>
+      <!--refresher end---->
+
+      <!--future:type=0,past:type=1---->
+      <ion-slides style="height:100%;" (ionSlideDidChange)="onSlideDidChange()">
+        <ion-slide *ngFor="let t of getTargetType()">
+          <ion-list style="width:100%;height:100%;overflow-y: scroll;" (scroll)="onScroll($event)">
+            <ion-item *ngFor="let target of getData(t.id);let lst=last;" 
+              lines="{{lst?'none':''}}" (click)="goTargetViewer(target)">
+              <p>
+                <ion-label class="ion-text-wrap" 
+                [ngClass]="{'future-line':target.type==0,'past-line':target.type==1}">
+                  <b style="font-size:large;">{{target.name}}</b>
+                </ion-label>
+              </p>
+              <ion-label slot="end">
+                <b style="font-size:xx-large;">{{target.days}}</b>
+              </ion-label>
+              <ion-badge color="primary" slot="end" *ngIf="target.type==0">天</ion-badge>
+              <ion-badge color="warning" slot="end" *ngIf="target.type==1">天</ion-badge>
+            </ion-item>
+          </ion-list>
+        </ion-slide>
+      </ion-slides>
+    </ion-content>
+    <!--list end---->
+    <!--card start---->
+    <ion-content *ngIf="!isList">
+      <ion-grid>
+        <ion-row> 
+          <ion-col size="6" size-md="4" size-lg="2" 
+          *ngFor="let target of getOrderByTopData()" (click)="goTargetViewer(target)">
+            <ion-card style="margin:0;">
+              <ion-card-header [ngClass]="{'future-header':target.type==0, 'past-header':target.type==1}">
+                <ion-card-subtitle style="--color:white;text-align:center;">
+                  <b style="font-size: large;">{{target.name}}</b>
+                </ion-card-subtitle>
+              </ion-card-header>
+            
+              <ion-card-content style="text-align:center;padding:5px;">
+                <b style="font-size:xx-large;">{{target.days}}</b>
+              </ion-card-content>
+
+              <ion-card-header style="border-top:1px solid #eeeeee;padding:10px;">
+                <ion-card-subtitle style="--color:gray;text-align:center;">
+                  <b>{{target.date|date:'yyyy-MM-dd EE'}}</b>
+                </ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>          
+        </ion-row>
+      </ion-grid>
+    </ion-content>
+    <!--card end---->
+  </div>
+  <!--
+  <ion-fab style="margin:20px;" slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button [routerLink]="['/target']">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  -->
+</ion-content>

@@ -1,0 +1,7 @@
+{
+  "name": "today",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,36 @@
+.preview-box {
+    padding:10px;
+    display:flex;
+    justify-content:center;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('/assets/viewer-bg.jpg');
+    position: relative;
+}
+
+.share-box{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.scroll {
+    text-align: center;
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.scroll-item {
+    width: 80px;
+    height: 80px;
+    margin:10px;
+    background-color: aqua;
+    border-right: 1px solid;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+
+  

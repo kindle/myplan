@@ -1,0 +1,17 @@
+
+/* iOS places the subtitle above the title */
+ion-card-header.ios {
+  display: flex;
+  flex-flow: column-reverse;
+}
+
+.demo-chart {
+  width: 100%;
+  height: 400px;
+  margin: 15px;
+}
+
+.chart-top{
+  display: flex;
+  align-items: flex-start;
+}

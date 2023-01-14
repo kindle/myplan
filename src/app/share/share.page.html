@@ -1,0 +1,58 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="white">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home" color="primary"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Today · 分享</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content style="ion-padding">
+  <div class="preview-box" id="print-wrapper-prview">
+    <div>Today App</div>
+    <ion-card class="viewer-card" *ngIf="currentTarget">
+      <ion-card-header [ngClass]="{'past-header':currentTarget.type==1, 'future-header':currentTarget.type==0}">
+        <ion-card-subtitle style="--color:white;text-align:center;">
+          <b style="font-size: large;">{{currentTarget.name}}{{currentTarget.type==1?'已经':'还有'}}</b>
+        </ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content style="text-align:center;padding:5px;">
+        <b style="font-size:120px;">
+          {{currentTarget.days}}
+        </b>
+      </ion-card-content>
+
+      <ion-card-header style="border-top:1px solid #eeeeee;padding:10px;position:absolute;bottom:0;width:100%;">
+        <ion-card-subtitle style="--color:gray;text-align:center;padding:5px 0;">
+          {{currentTarget.type==1?'起始日':'目标日'}}: {{currentTarget.date|date:'yyyy-MM-dd EEEE'}} 
+        </ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+
+    <div style="display:flex;align-items:center;">
+      <img src="./assets/icon/favicon.png" style="width:20px;height:20px;margin:10px;">
+      <b style="color:white;">目标日·Tooday</b>
+    </div>
+  </div>
+
+  <div class="scroll">
+    <div *ngFor="let template of [1,2,3,4,5,6,7,8,9]" class="scroll-item">
+      <img src="./assets/cover1.jpg" style="width:80px;height:80px;">
+      <div>{{i}}</div>
+    </div>
+  </div>
+
+  <ion-item>
+    <ion-icon name="image-outline" style="margin-right:15px;"></ion-icon>
+    <ion-label style="flex:inherit; margin-right:10px;">选择背景图片</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-icon name="pencil-outline" style="margin-right:15px;"></ion-icon>
+    <ion-input placeholder="写点什么" [(ngModel)]="quote" style="border-bottom:2px solid #3880ff;"></ion-input>
+  </ion-item>
+
+  <div class="share-box">
+    <ion-button (click)="save()">save</ion-button>
+    <ion-button (click)="share()">share</ion-button>
+  </div>
+</ion-content>

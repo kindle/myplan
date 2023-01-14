@@ -1,0 +1,123 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+
+.past-header {
+    --background:orange;
+    padding: 10px;
+}
+
+.future-header {
+    --background:#3880ff;
+    padding: 10px;
+}
+
+.viewer-card{
+    border-radius: 10px;
+    //margin: 30px;
+    width:320px;
+    height:320px;
+}
+
+.future-line {
+    border-left: 2px solid #428cff;
+    padding-left: 10px;
+}
+
+.past-line {
+    border-left: 2px solid #ffd534;
+    padding-left: 10px;
+}
+
+.title-icon {
+    margin-inline-end:16px;
+}
+
+.group-cover{
+    background-color: white;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100px;
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+    color: white;
+    margin:5px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+ion-toast.custom-toast::class(toast-wrapper) {
+    width:fit-content;
+}
+
+ion-toast.custom-toast {
+    --background: #F4F4FA;
+    --box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);
+    --color: #4b4a50;
+}
+    
+ion-toast.custom-toast::part(message) {
+    font-style: italic;
+}
+
+ion-toast.custom-toast::part(button) {
+    border-left: 1px solid #d2d2d2;
+    color: #030207;
+    font-size: 15px;
+}
+
+
+
+.action-button-box{
+    display:flex;justify-content:center;
+}
+.action-button{
+    width:100%;margin:10px;height: 46px;font-size: large;
+}
+.action-button-medium{
+    margin:10px;height: 46px;font-size: large;
+}
+
+/*picker title center start*/
+.picker-toolbar-button{
+    width:100%;
+}
+
+.picker-button.sc-ion-picker-md, .picker-button.ion-activated.sc-ion-picker-md{
+    font-size:large;
+    color:black;
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+}
+/*picker title center end*/

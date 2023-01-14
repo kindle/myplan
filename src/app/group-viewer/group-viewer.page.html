@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="currentGroup">Today · {{currentGroup.name}}</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="editGroup()">
+        <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="outer-content" style="height:100%;">
+    <ion-list style="padding:0;">
+      <ion-item *ngFor="let target of targets;let lst=last;" 
+        lines="{{lst?'none':''}}" (click)="goTargetViewer(target)">
+        <p>
+          <ion-label class="ion-text-wrap" 
+          [ngClass]="{'future-line':target.type==0,'past-line':target.type==1}">
+            <b style="font-size:large;">{{target.name}}</b>
+          </ion-label>
+        </p>
+        <ion-label slot="end">
+          <b style="font-size:xx-large;">{{target.days}}</b>
+        </ion-label>
+        <ion-badge color="primary" slot="end" *ngIf="target.type==0">天</ion-badge>
+        <ion-badge color="warning" slot="end" *ngIf="target.type==1">天</ion-badge>
+      </ion-item>
+    </ion-list>
+    <div *ngIf="targets&&targets.length==0" style="display:flex;flex-direction:column;justify-content:center;align-items:center;height:100%;">
+      <ion-icon name="today-outline" color="medium" style="width:100px;height:100px;" size="large"></ion-icon>
+      <ion-button class="action-button-medium" style="border-radius:10px;margin-top:50px;" (click)="addTarget()">
+        <ion-icon name="add-outline"></ion-icon>添加目标日
+      </ion-button>
+      <ion-button class="action-button-medium" style="border-radius:10px;" color="white" style="color:black;margin-top:20px;">
+        <ion-icon name="download-outline"></ion-icon>导入目标日
+      </ion-button>
+    </div>
+
+    <div class="action-button-box" *ngIf="targets&&targets.length>0" style="width:100%;position:absolute;bottom:10px;display:flex;justify-content: center;">
+      <ion-button class="action-button-medium" (click)="addTarget()">
+        <ion-icon name="add-outline"></ion-icon>添加目标日
+      </ion-button>
+      <ion-button class="action-button-medium" color="warning">
+        <ion-icon name="share-outline"></ion-icon>
+      </ion-button>
+    </div>
+</ion-content>

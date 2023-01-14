@@ -1,0 +1,62 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar *ngIf="!canSelect">
+    <ion-title>便签</ion-title>
+    <ion-title style="color:gray;font-size:small;">{{data.noteData?data.noteData.length:0}}个记录</ion-title>
+    <ion-buttons slot="end" (click)="opt()" *ngIf="!canSelect">
+      <ion-button>
+        <ion-icon name="options-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="search-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar *ngIf="canSelect">
+    <ion-buttons slot="start" (click)="opt()">
+      <ion-button>
+        <ion-icon name="close-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>已选{{1}}项</ion-title>
+    <ion-checkbox slot="end" style="margin-right:25px;"></ion-checkbox>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card *ngFor="let note of getOrderNotes()" (click)="goNote(note)">
+    <ion-card-header>
+      <ion-card-subtitle>
+        <div>
+          {{note.date|date:'MM/dd'}}
+          <ion-checkbox style="float:right;"  *ngIf="canSelect"></ion-checkbox>
+        </div>
+        
+      </ion-card-subtitle>
+      <ion-card-title *ngIf="note.title">{{note.title}}</ion-card-title>
+      <ion-card-subtitle>{{note.content}}</ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+  <ion-fab style="margin:20px;" slot="fixed" vertical="bottom" horizontal="end" *ngIf="!canSelect">
+    <ion-fab-button [routerLink]="['/note']">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<ion-footer class="ion-no-border" *ngIf="canSelect">
+  <div style="display:flex;justify-content:space-around;">
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="arrow-up-outline" size="large" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="trash-outline" size="large" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </div>
+</ion-footer>

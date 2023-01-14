@@ -1,0 +1,99 @@
+<ion-content>
+  <!--header start---->
+  <ion-header class="ion-no-border">
+    <ion-toolbar color="white">
+      <ion-title style="font-size: x-large;">分组</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="toggleReorder()">
+          <ion-icon name="options-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button [routerLink]="['/group']">
+          <ion-icon name="add-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <!--header end---->
+  <!--book start-->
+  <div style="padding: 5px 0;background-color:white;display:grid;justify-content:center;grid-template-columns:24% 24% 24% 24%;">
+    <!--
+    <div class="group-cover" [routerLink]="['/group']"
+      style="display:flex;flex-direction:column;align-items:center;border:1px solid #eeeeee;">
+      <ion-icon name="add-circle" size="large" color="primary"></ion-icon>
+      <p style="color:gray;font-size: small;font-weight: lighter;">
+        添加新分组
+      </p>
+    </div>-->
+    <div *ngFor="let g of data.group" class="group-cover" (click)="goGroupViewer(g)"
+      style="background-image:url('/assets/{{g.cover}}.jpg');flex-direction: column;justify-content:space-around;">
+      <div></div>
+      <div>{{g.name}}</div>
+      <div style="font-size: normal;">{{g.count}}</div>
+    </div>
+  </div>
+  <!--book end---->
+  <!--list start---->
+  <ion-content>
+    <!--refresher start---->
+    <ion-refresher slot="fixed" (ionRefresh)="dragDown($event)">
+      <ion-refresher-content
+        pullingIcon=""
+        pullingText="继续下拉添加目标"
+        refreshingSpinner=""
+        refreshingText="">
+      </ion-refresher-content>
+    </ion-refresher>
+    <!--refresher end---->
+    <ion-list>
+      <ion-reorder-group [disabled]="isDisabled" 
+        (ionItemReorder)="handleReorder($any($event))">
+        <ion-item *ngFor="let g of data.group;let lst=last;" 
+          lines="{{lst?'none':''}}" (click)="goGroupViewer(g)">
+          <p>
+            <ion-label style="display:flex;align-items:center;">
+              <ion-icon name="close-circle-outline" style="margin-right:15px;"
+              (click)="deleteGroup($event,g)" *ngIf="!isDisabled"></ion-icon>
+
+              <ion-icon src="/assets/icon/{{g.icon}}.svg" style="margin-right:15px;font-size:25px;"></ion-icon>
+              <ion-label style="flex:inherit; margin-right:10px;font-size: large;font-weight:bold;">{{g.name}}</ion-label>
+              
+
+            </ion-label>
+          </p>
+          
+          <ion-badge slot="end" *ngIf="isDisabled" color="light" 
+            style="color:grey;border-radius:50%;min-width: 20px;">
+            {{g.count}}
+          </ion-badge>
+          <ion-icon slot="end" name="chevron-forward-outline"
+              *ngIf="isDisabled"></ion-icon>
+
+          <ion-icon name="arrow-up-outline" (click)="setTop($event,g)"
+          slot="end" *ngIf="!isDisabled">
+          </ion-icon>
+          <ion-reorder slot="end">
+            <ion-icon name="reorder-three-outline"></ion-icon>
+          </ion-reorder>
+        </ion-item>
+      </ion-reorder-group>
+    </ion-list>
+    <!--tutorial start---->
+    <!--
+    <ion-list>
+      <ion-item [routerLink]="['/tabs/tab3']">
+        <ion-icon name="bar-chart-outline" style="margin-right:15px;"></ion-icon>
+        <ion-label style="flex:inherit; margin-right:10px;">完成度统计</ion-label>
+      </ion-item>
+      <ion-item lines="none" [routerLink]="['/tutorial']">
+        <ion-icon name="book-outline" style="margin-right:15px;"></ion-icon>
+        <ion-label style="flex:inherit; margin-right:10px;">如何更好的使用Today</ion-label>
+      </ion-item>
+    </ion-list>
+    -->
+    <!--tutorial end---->
+  </ion-content>
+  <!--list end---->
+  
+</ion-content>

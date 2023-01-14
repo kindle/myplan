@@ -1,0 +1,109 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{this.target.id==0?'添加':'编辑'}}目标</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="outer-content">
+  <ion-item lines="none">
+    <ion-icon name="briefcase-outline" slot="start" class="title-icon"></ion-icon>
+    <ion-input placeholder="点击输入目标名称" [(ngModel)]="target.name" style="border-bottom:2px solid #3880ff;"></ion-input>
+  </ion-item>
+
+  <ion-item lines="none" style="margin-top:10px;">
+    <ion-icon name="calendar-clear-outline" slot="start" class="title-icon"></ion-icon>
+    <ion-label class="title">目标日</ion-label>
+  </ion-item>
+
+  <ion-item lines="none" id="open-modal-target-date">
+    <ion-icon name="" slot="start" class="title-icon"></ion-icon>
+    <ion-label color="primary" class="title">{{data.getDatePipe(target.date | date:'yyyy-MM-dd EEEE')}}</ion-label>
+    <ion-modal trigger="open-modal-target-date" [cssClass]="'bottom-end'">
+      <ng-template>
+        <ion-datetime
+          [showDefaultButtons]="false"
+          locale="zh-CN"
+          min="1900-01-01T00:00:00"
+          max="3000-12-31T23:59:59"
+          presentation="date"
+          [preferWheel]="true"
+          [(ngModel)]="target.date"
+          size="cover">
+        <ion-label slot="title" style="--background:#eee;font-size: large;text-align: center;">选择目标日</ion-label>
+        
+      </ion-datetime>
+      </ng-template> 
+    </ion-modal>
+  </ion-item>
+
+  <ion-item lines="none">
+    <ion-icon name="albums-outline" slot="start" class="title-icon"></ion-icon>
+    <ion-label class="title">分组</ion-label>
+
+    <ion-icon name="{{data.globalCurrentTargetGroup.icon}}" slot="end" (click)="selectGroup()"></ion-icon>
+    <ion-label color="primary" slot="end"
+    style="margin-inline-start:15px;" class="title" (click)="selectGroup()">
+      {{data.globalCurrentTargetGroup.name}}
+    </ion-label>
+    <ion-icon name="chevron-down-outline" slot="end" (click)="selectGroup()"></ion-icon>
+  </ion-item>
+
+  <ion-item lines="none">
+    <ion-icon name="arrow-up-outline" slot="start" class="title-icon"></ion-icon>
+    <ion-label class="title">置顶</ion-label>
+
+    <ion-toggle [(ngModel)]="target.isTop" slot="end"></ion-toggle>
+  </ion-item>
+
+  <ion-item lines="none" (click)="repeatPicker()">
+    <ion-icon name="repeat-outline" slot="start" class="title-icon"></ion-icon>
+    <ion-label class="title">重复</ion-label>
+
+    <ion-label color="primary" slot="end" style="margin-inline-start:15px;" class="title">
+      {{(target.repeatUnit==0||target.repeatUnit==undefined)?'不重复':data.GetPickerNumText(target.repeatUnit)+data.GetPickerTypeText(target.repeatType)}}
+    </ion-label>
+    <ion-icon name="chevron-down-outline" slot="end"></ion-icon>
+  </ion-item>
+
+  <ion-accordion-group #accordionGroup style="margin-top:10px;">
+    <ion-accordion value="first">
+      <ion-item slot="header">
+        <ion-icon name="color-filter-outline" slot="start" class="title-icon"></ion-icon>
+        <ion-label class="title">高级设置</ion-label>
+      </ion-item>
+      <ion-list slot="content">
+        <ion-item lines="none">
+          <ion-icon name="stopwatch-outline" slot="start" class="title-icon"></ion-icon>
+          <ion-label class="title" slot="start" style="flex:none;margin-inline-end:10px;">显示精准时间</ion-label>
+          <ion-badge color="danger" style="border-radius:15px;">Pro</ion-badge>
+          
+      
+          <ion-toggle slot="end"></ion-toggle>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-icon name="color-filter-outline" slot="start" class="title-icon"></ion-icon>
+          <ion-label class="title">正数包含起始日 (+1天)</ion-label>
+      
+          <ion-toggle slot="end"></ion-toggle>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-icon name="calendar-outline" slot="start" class="title-icon"></ion-icon>
+          <ion-label class="title" slot="start">结束时间</ion-label>
+      
+          <ion-toggle slot="end"></ion-toggle>
+        </ion-item>
+      </ion-list>
+      
+
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <div class="action-button-box">
+    <ion-button expand="full" class="action-button" *ngIf="target.id>0"
+    (click)="delete()" color="danger">删除</ion-button>
+    <ion-button expand="full" class="action-button" (click)="save()">保存</ion-button>
+  </div>
+</ion-content>

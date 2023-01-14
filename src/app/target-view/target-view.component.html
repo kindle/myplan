@@ -1,0 +1,91 @@
+<div style="display:flex;justify-content:center;padding:30px">
+  <div id="flip-box{{target.id}}" class="flip-container" *ngIf="target!=null">
+    <div class="flipper">
+      <div class="viewer-card front" 
+        style="width:320px;position:fixed;border:1px solid red;background:url({{target.dataUrl}})" 
+        *ngIf="target.dataUrl">
+        
+      </div>
+
+      <ion-card class="viewer-card front" *ngIf="!target.dataUrl">
+        <ion-card-header [ngClass]="{'past-header':target.type==1, 'future-header':target.type==0}">
+          <ion-card-subtitle style="--color:white;text-align:center;">
+            <b style="font-size: large;">{{target.name}}{{target.type==1?'已经':'还有'}}</b>
+          </ion-card-subtitle>
+        </ion-card-header>
+      
+        <ion-card-content style="text-align:center;padding:5px;">
+          <b style="font-size:120px;" [ngClass]="{'font1':fontType==1, 'font2':fontType==2}">
+            {{target.days}}
+          </b>
+        </ion-card-content>
+
+        <ion-card-header style="border-top:1px solid #eeeeee;padding:10px;position: fixed;bottom:0;width:100%;">
+          <ion-card-subtitle style="--color:gray;text-align:center;padding:5px 0;" *ngIf="target">
+            {{target.type==1?'起始日':'目标日'}}: {{data.getDatePipe(target.type==1?target.date:target.targetDate|date:'yyyy-MM-dd EEEE')}} 
+          </ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+
+      <ion-card class="viewer-card back">
+        <ion-card-header [ngClass]="{'past-header':target.type==1, 'future-header':target.type==0}">
+          <ion-card-subtitle style="--color:white;text-align:center;">
+            <b style="font-size: large;">{{target.name}} | Big Days</b>
+          </ion-card-subtitle>
+        </ion-card-header>
+      
+        <ion-card-content style="text-align:center;padding:5px;">
+          <ion-list style="height:275px;overflow: hidden;overflow-y: auto;">
+            <ion-item *ngFor="let bigDay of bigDays;index as i">
+              <ion-label>
+                <p>{{target.name}}</p>
+                {{data.getDatePipe(bigDay.date|date:'yyyy-MM-dd EEEE','周')}}
+              </ion-label>
+              <ion-label slot="end">
+                <b style="font-size: x-large;">{{bigDay.days}}</b>
+              </ion-label>
+              <ion-badge slot="end" style="margin-inline-start:10px;">天</ion-badge>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+
+      </ion-card>
+    </div>
+  </div>
+</div>
+
+<!--=========================================-->
+
+<div class="viewer-buttons" id="flip-menu-long">
+  <ion-buttons>
+    <ion-button class="viewer-button" (click)="share()">
+      <ion-icon name="share-outline" color="light"></ion-icon>
+      <ion-label color="light">分享</ion-label>
+    </ion-button>
+    <ion-button class="viewer-button">
+      <ion-label color="light">存为图片</ion-label>
+    </ion-button>
+    <ion-button class="viewer-button-transparent" (click)="toggleShowSettings($event)" >
+      <ion-icon name="images-outline" color="light"></ion-icon>
+      <ion-label color="light">背景</ion-label>
+    </ion-button>
+    <ion-button class="viewer-button-transparent" (click)="toggleFlip()">
+      <ion-icon name="flag-outline" color="light"></ion-icon>
+    </ion-button>
+    <ion-button class="viewer-button">
+      <ion-icon name="add-outline" color="light"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</div>
+
+<div class="viewer-buttons menu-short" id="flip-menu-short">
+  <ion-buttons>
+    <ion-button class="viewer-button" (click)="share()">
+      <ion-icon name="share-outline" color="light"></ion-icon>
+      <ion-label color="light">分享</ion-label>
+    </ion-button>
+    <ion-button class="viewer-button-transparent" (click)="toggleFlip()">
+      <ion-icon name="calendar-outline" color="light"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</div>

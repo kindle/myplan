@@ -1,0 +1,52 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="transparent">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home" color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">目标倒数日</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="editTarget()">
+        <ion-icon name="pencil-outline" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+  
+<ion-content [fullscreen]="true" class="outer-content viewer-bg" (click)="hideShowSettings()">
+  <ion-slides style="height:100%;" (ionSlideDidChange)="onTargetSlideDidChange()">
+    <ion-slide *ngFor="let t of this.data.targetData" style="display:flex;align-items:flex-start;">
+      <app-target-view [target]="t"></app-target-view>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
+
+<div *ngIf="showBgSettings" style="bottom:0;height:300px;width:100%;position:fixed;border-top-left-radius:15px;border-top-right-radius:15px;background-color:white;">
+    <div class="ion-margin-top">
+      <ion-item lines="none">
+        <ion-label style="font-size:large;color:grey;">选择背景图片</ion-label>
+      </ion-item>
+      <ion-item lines="none" (click)="goImageAdjust()"
+        style="border-radius: 5px;border:1px solid gray;margin:0 15px;">
+        <ion-icon name="images-outline" style="margin-right:15px;"></ion-icon>
+        <ion-label style="flex:inherit; margin-right:10px;font-size: large;">从相册选择图片</ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label style="flex:inherit; margin-right:10px;font-size: large;color:grey;">选择喜欢的字体</ion-label>
+        <ion-badge color="danger" style="border-radius:10px;">Pro</ion-badge>
+      </ion-item>
+      <div class="scroll">
+        <div class="scroll-item" style="vertical-align:top;">
+          <ion-icon name="ban-outline"></ion-icon>
+        </div>
+        <div *ngFor="let t of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]" class="scroll-item" (click)="chooseFont(t)">
+          <div>{{t}}</div>
+        </div>
+      </div>
+      <ion-button (click)="closeBg()"
+        style="width:-webkit-fill-available;margin:15px;color:black;" color="white">
+        完成
+      </ion-button>
+    </div>
+</div>
